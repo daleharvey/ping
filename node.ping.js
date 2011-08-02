@@ -1,9 +1,5 @@
-
-
 var http = require('http');
-var follow = require('follow');
 var request = require('request');
-var cron = require("cron");
 
 var opts = {
   host: "127.0.0.1",
@@ -36,6 +32,7 @@ function startPingHost() {
     writeStats(req.headers);
 
   }).listen(opts.ping_port, opts.host);
+
   console.log('Ping server running at http://' + opts.host + ':' + opts.ping_port);
 };
 
