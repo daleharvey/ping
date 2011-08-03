@@ -2,17 +2,97 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>CouchPotato</title>
+    <title>Unnamed Stats Stuff</title>
 
     <style type="text/css">
-      body, p, td { font-size:11px; font-family:sans-serif; }
+      body, p, td { font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', sans-serif; line-height:1.5em;
+font-size: 16px;  color:#DDD; }
+      html { background:#333; }
+      body { width:960px; margin:0px auto; }
+      #placeholder { }
+      #wrapper { background:#111; padding:40px 0px 20px 20px; margin:0px auto; width:620px;border:3px solid #666; border-radius:5px; position:relative; }
+      h1, h2 { font-weight:normal }
+      a { color:#82A6B0; }
+      h1 { text-align:center; margin-top:30px; margin-bottom:30px;}
+      h2 { margin-top:40px; color:#AAA; }
+      pre { background:#000; margin:20px; padding:5px; border:3px solid #666; border-radius:5px; }
+      #counterwrapper { position:absolute; top:10px; right:20px; }
     </style>
 
   </head>
 
   <body>
 
-    <div id="placeholder" style="width:600px;height:300px;"></div>
+    <h1>XXX.com</h1>
+
+    <p>Browser Statistics suck, between
+      <a href="http://www.w3schools.com/browsers/browsers_stats.asp">
+        sites releasing their own personal statistics</a>,
+      <a href="http://www.alexa.com/toolbar">toolbars that collect a single
+        users stats</a> or <a href="http://statcounter.com/">analytics companies
+        aggregating only their users stats</a>, Getting a reliable overview of
+      what browsers people are using is impossible.</p>
+
+    <p>By embedding a single image tag on your website on your website, you
+      can help everyone contribute to a global pool of data about
+      usage statistics.</p>
+
+    <h1>Results</h1>
+
+
+    <div id="wrapper">
+      <div id="counterwrapper">Stats collected: <span id="counter"></span></div>
+      <div id="placeholder" style="width:600px;height:300px;"></div>
+    </div>
+
+    <h1>Frequently Asked Questions</h1>
+
+    <h2>How do I install?</h2>
+    <p>All you need to do is embed this image tag anywhere into your HTML.
+      <pre><code>&lt;img src="//xxxxxxx.com/spacer.gif" /&gt;</code></pre></p>
+
+    <h2>Is this Open Source? Show me the code</h2>
+    <p>Ok: <a href="http://github.com/daleharvey/ping">http://github.com/daleharvey/ping</a></p>
+
+    <h2>I already have Google Analytics?</h2>
+    <p>Google Analytics only tracks your own website, that is certainly important
+      and taking your audience into account should be the most important factor
+      when deciding what technologies to use, however its also useful to have
+      information about the trends happening in global browser usage.</p>
+
+    <h2>Isnt this the same as StatCounter?</h2>
+    <p>Stat counter is a full analytics package which is expensive in terms of
+      page load, we hope by providing an ultra lightweight mechanism to contribute,
+      people who are using other more popular analytics tools such as
+      Google Analytics will also take part.</p>
+
+    <h2>What about Javascript statisics / Monitor resolution and other statistics?</h2>
+    <p>In order to make it as lightweight as possible, we only collect statistics
+      which can be pulled from a plain image request, that makes sure we have
+      as little impact on your page as possible.</p>
+
+    <h2>But my privacy!</h2>
+    <p>We only collect very minimal amount of data from the requests, and your site
+      details are never recorded at all.</p>
+
+    <h2>Got API?</h2>
+    <p>All data is stored in CouchDB and is accessible though the CouchDB API,
+      you can <a href="/_utils">browse the data in futon.</a></p>
+
+    <h2>Can I run this on a personal site?</h2>
+    <p>You probably dont want to, there are better free analytics tools like
+      <a href="http://analytics.google.com">Google Analytics</a> and
+      <a href="http://statcounter.com">StatCounter</a>. However if you really want to
+      please just checkout the source from
+      <a href="http://github.com/daleharvey/ping">Github</a> and follow the README,
+      if you are awesome you can replicate your results into the global
+      database.</p>
+
+    <h2>Is this going to slow down my site?</h2>
+    <p>We only use a single pixel tracking image so there should be no noticeable
+      effect on your website even if our server doesnt respond, however your
+      visitors will be making another HTTP request so it isnt completely without
+      effect.</p>
 
     <script src="./js/jquery-1.6.min.js"></script>
     <script src="./js/jquery.couch.js"></script>
@@ -20,30 +100,10 @@
     <script src="./js/date.js"></script>
     <script src="./js/router.js"></script>
     <script src="./js/jquery.flot.js"></script>
+    <script src="./js/jquery.flot.stack.js"></script>
+    <script src="./js/ping.js"></script>
 
-<script type="text/javascript">
-
-  var router = Router();
-  var $db = $.couch.db("ping");
-
-  router.get(/^(#)?$/, function (rtr) {
-    $db.view("webui/browsers", {group:true}).then(function(data) {
-      drawGraph(data);
-    });
-  });
-
-  function drawGraph(data) {
-    var graphData = [];
-    $.each(data.rows, function(index, val) {
-      graphData.push({label:val.key.join(" "), data:[[index, val.value]]});
-    });
-
-    $.plot($("#placeholder"), graphData, {bars: { show: true}});
-  }
-
-  router.init(window);
-
-</script>
+    <img src="//talk.io/spacer.gif" />
 
   </body>
 

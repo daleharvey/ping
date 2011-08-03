@@ -1,3 +1,5 @@
+
+
 var http = require('http');
 var request = require('request');
 
@@ -32,7 +34,6 @@ function startPingHost() {
     writeStats(req.headers);
 
   }).listen(opts.ping_port, opts.host);
-
   console.log('Ping server running at http://' + opts.host + ':' + opts.ping_port);
 };
 

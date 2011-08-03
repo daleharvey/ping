@@ -3,7 +3,7 @@ function(doc) {
   var uaParser = require('views/lib/uaparser');
 
   if (!doc.headers) {
-    emit(["unknown"], 1);
+    emit(["Unknown"], 1);
     return;
   }
 
