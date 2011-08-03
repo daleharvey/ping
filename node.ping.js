@@ -42,6 +42,7 @@ function startPingHost() {
 function writeStats(headers) {
 
   var stats = {
+    date: JSON.stringify(new Date()),
     headers: {
       'user-agent' : headers['user-agent']
     }
