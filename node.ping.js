@@ -28,7 +28,9 @@ function startPingHost() {
 
     var buf = new Buffer(43);
     buf.write(spacer, "base64");
-    res.write(buf, { 'Content-Type': 'image/gif' }, 200);
+
+    res.writeHead(200, {'Content-Type': 'image/gif'});
+    res.write(buf);
     res.end();
 
     writeStats(req.headers);
